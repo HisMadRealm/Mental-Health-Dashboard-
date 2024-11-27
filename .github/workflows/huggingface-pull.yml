@@ -1,10 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
 name: Sync Hugging Face Space to GitHub
 
 on:
@@ -17,21 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the GitHub repository
-    - name: Checkout GitHub Repository
-      uses: actions/checkout@v3
+      # Step 1: Checkout the GitHub repository
+      - name: Checkout GitHub Repository
+        uses: actions/checkout@v3
 
-    # Step 2: Clone Hugging Face Space
-    - name: Clone Hugging Face Space
-      run: |
-        git clone https://huggingface.co/spaces/<therickglenn/MentalHealthDashboard> hf-space
-        rsync -av --progress hf-space/ . --exclude .git
+      # Step 2: Clone Hugging Face Space
+      - name: Clone Hugging Face Space
+        run: |
+          git clone https://huggingface.co/spaces/<your-hf-username>/<your-space-name> hf-space
+          rsync -av --progress hf-space/ . --exclude .git
 
-    # Step 3: Commit and Push Changes
-    - name: Commit and Push Changes
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .
-        git commit -m "Sync from Hugging Face Space" || echo "No changes to commit"
-        git push
+      # Step 3: Commit and Push Changes
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Sync from Hugging Face Space" || echo "No changes to commit"
+          git push
